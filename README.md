@@ -8,14 +8,17 @@
 npm install react-native-ahca
 ```
 
+## Docs
+- [android](./docs/android-2.7.14.docx)
+- [ios](./docs/ios.docx)
+
 ## Usage
+- [example](./example/src/App.tsx)
 
 ```js
 import Ahca from "react-native-ahca";
 
 // ...
-
-const result = await Ahca.multiply(3, 7);
 ```
 
 ## Contributing
