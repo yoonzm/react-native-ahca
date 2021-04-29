@@ -176,7 +176,6 @@ class AhcaModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaMo
    */
   @ReactMethod
   fun certLogin(data: String, dataFormat: String, dataType: String, pn: String, promise: Promise) {
-    STShield.DATA_FORMAT_P1
     STShield.getInstance().certLogin(reactApplicationContext.currentActivity, data, dataFormat, dataType, pn, OnCertLoginResult { certLoginResult ->
       Utils.commonResponseHandle(promise, certLoginResult);
     });
