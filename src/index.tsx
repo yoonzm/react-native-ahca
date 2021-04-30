@@ -26,7 +26,6 @@ import type {
 export * from './types';
 
 type AhcaType = {
-  multiply(a: number, b: number): Promise<number>;
   /**
    * 配置服务地址、项目授权
    * @param url
@@ -40,11 +39,25 @@ type AhcaType = {
    */
   initUseId(userId: String): void;
   /**
+   * 配置活体检测授权
+   */
+  initFace(faceLicenseID: String, faceLicenseFileName: String): void;
+  /**
+   * 配置主题色
+   * @supported android
+   */
+  initThemeColor(color: String): void;
+  /**
+   * 获取设备唯一标识
+   */
+  getDeviceID(): Promise<string>;
+  /**
    * 查询本地证书是否存在
    */
   isLocalCertExist(): Promise<boolean>;
   /**
    * 检查证书状态是否正常
+   * @supported android
    */
   checkCert(): Promise<CommonResult>;
   /**
@@ -69,6 +82,7 @@ type AhcaType = {
   updatePersonalCert(userInfo: Partial<UserInfo>): Promise<CommonResult>;
   /**
    * 更新企业证书
+   * @supported android
    */
   updateCompanyCert(companyInfo: Partial<CompanyInfo>): Promise<CommonResult>;
   /**
@@ -81,6 +95,7 @@ type AhcaType = {
   resetCompanyPIN(companyInfo: Partial<CompanyInfo>): Promise<CommonResult>;
   /**
    * 修改证书PIN码
+   * @supported android
    */
   modifyPIN(): Promise<CommonResult>;
   /**
@@ -141,6 +156,7 @@ type AhcaType = {
   postponeCert(): Promise<CommonResult>;
   /**
    * 修改PIN缓存时间
+   * @supported android
    */
   setPrivateKeyCacheTime(pn: String): Promise<PKCacheResult>;
   /**
@@ -175,10 +191,12 @@ type AhcaType = {
   getCert(certType: CertType): Promise<GetCertResult>;
   /**
    * 获取单位编号列表
+   * @supported android
    */
   getDepartmentNo(): Promise<GetDepartmentNoResult>;
   /**
    * 下载预制证书
+   * @supported android
    */
   downloadCert(
     phoneNum: String,
@@ -191,10 +209,12 @@ type AhcaType = {
   clearCert(): Promise<CommonResult>;
   /**
    * 查询生物识别启用状态
+   * @supported android
    */
   getFingerprintStatus(): Promise<boolean>;
   /**
    * 开启/关闭生物识别
+   * @supported android
    */
   openFingerprint(open: Boolean): Promise<CommonResult>;
 };

@@ -1,0 +1,6 @@
+framework module AnXinSDK {
+  umbrella header "AnXinSDK.h"
+
+  export *
+  module * { export * }
+}
