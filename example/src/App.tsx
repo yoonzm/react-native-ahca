@@ -258,8 +258,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <ScrollView>
-        {items.map((item) => (
-          <Button title={item.title} onPress={item.onPress} />
+        {items.map((item, index) => (
+          <Button key={index} title={item.title} onPress={item.onPress} />
         ))}
       </ScrollView>
     </View>
