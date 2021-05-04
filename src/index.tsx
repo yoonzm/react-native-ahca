@@ -5,7 +5,10 @@ export * from './types';
 
 const { Ahca } = NativeModules;
 
-function platformApi(apiNames: string[] = [], supportPlatform: string[] = []) {
+function platformApi(
+  apiNames: (keyof AhcaType)[] = [],
+  supportPlatform: string[] = []
+) {
   return apiNames.reduce((previousValue, currentValue) => {
     return {
       ...previousValue,
