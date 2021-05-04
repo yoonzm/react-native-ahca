@@ -30,8 +30,8 @@ export interface CompanyInfo {
 export interface SignImgSetting {
   userOrientation: Orientation;
   paintStrokeWidth: number;
-  imgBackgroundColor: number;
-  paintColor: number;
+  imgBackgroundColor: string;
+  paintColor: string;
   standardWidth: number;
   standardHeight: number;
 }

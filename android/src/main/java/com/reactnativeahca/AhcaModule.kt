@@ -271,12 +271,24 @@ class AhcaModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaMo
     });
   }
 
+  private fun parseSignImgSetting(signImgSetting: ReadableMap): SignImgSetting? {
+    val signImgSettingHashMap = signImgSetting.toHashMap()
+    // 转换颜色值类型
+    if (signImgSettingHashMap.containsKey("paintColor")) {
+      signImgSettingHashMap["paintColor"] = Color.parseColor(signImgSettingHashMap["paintColor"] as String?)
+    }
+    if (signImgSettingHashMap.containsKey("imgBackgroundColor")) {
+      signImgSettingHashMap["imgBackgroundColor"] = Color.parseColor(signImgSettingHashMap["imgBackgroundColor"] as String?)
+    }
+    return JSON.toJavaObject(JSON.parseObject(JSON.toJSONString(signImgSettingHashMap)), SignImgSetting::class.java)
+  }
+
   /**
    * 保存签名图片（弹出签名面板）
    */
   @ReactMethod
   fun setSignImgWithDrawingBoard(signImgSetting: ReadableMap, promise: Promise) {
-    val mSignImgSetting = JSON.toJavaObject(JSON.parseObject(JSON.toJSONString(signImgSetting.toHashMap())), SignImgSetting::class.java);
+    val mSignImgSetting = parseSignImgSetting(signImgSetting);
     STShield.getInstance().setSignImgWithDrawingBoard(reactApplicationContext.currentActivity, mSignImgSetting, OnSignImgResult { signImgResult ->
       Utils.commonResponseHandle(promise, signImgResult);
     });
@@ -287,7 +299,7 @@ class AhcaModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaMo
    */
   @ReactMethod
   fun getSignImgAndSetItIfNotExist(signImgSetting: ReadableMap, promise: Promise) {
-    val mSignImgSetting = JSON.toJavaObject(JSON.parseObject(JSON.toJSONString(signImgSetting.toHashMap())), SignImgSetting::class.java);
+    val mSignImgSetting = parseSignImgSetting(signImgSetting);
     STShield.getInstance().getSignImgAndSetItIfNotExist(reactApplicationContext.currentActivity, mSignImgSetting, OnSignImgResult { signImgResult ->
       Utils.commonResponseHandle(promise, signImgResult);
     });
@@ -308,7 +320,7 @@ class AhcaModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaMo
    */
   @ReactMethod
   fun getSignImgWithDrawingBoard(signImgSetting: ReadableMap, promise: Promise) {
-    val mSignImgSetting = JSON.toJavaObject(JSON.parseObject(JSON.toJSONString(signImgSetting.toHashMap())), SignImgSetting::class.java);
+    val mSignImgSetting = parseSignImgSetting(signImgSetting);
     STShield.getInstance().getSignImgWithDrawingBoard(reactApplicationContext.currentActivity, mSignImgSetting, OnSignImgResult { signImgResult ->
       Utils.commonResponseHandle(promise, signImgResult);
     });
