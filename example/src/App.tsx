@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Button, ScrollView, StyleSheet, View } from 'react-native';
+import { Button, ScrollView, StyleSheet, View, Platform } from 'react-native';
 import Ahca, {
   CardType,
   CertType,
@@ -257,7 +257,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView
+        contentContainerStyle={{
+          paddingTop: Platform.OS === 'ios' ? 20 : 0,
+        }}
+      >
         {items.map((item, index) => (
           <Button key={index} title={item.title} onPress={item.onPress} />
         ))}

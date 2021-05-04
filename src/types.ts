@@ -156,7 +156,7 @@ export interface CertDecryptResult extends CommonResult {
 }
 
 export interface SignImgResult extends CommonResult {
-  signImg: any[];
+  signImg: string;
 }
 
 export interface GetCertResult extends CommonResult {

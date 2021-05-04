@@ -291,43 +291,51 @@ class Ahca: NSObject, CertDelegate {
     
     @objc(setSignImgWithDrawingBoard:withResolver:withRejecter:)
     func setSignImgWithDrawingBoard(signImgSetting: NSDictionary, resolve:@escaping RCTPromiseResolveBlock,reject:@escaping RCTPromiseRejectBlock) -> Void {
-        AXUserInfo.sharedInstance()?.returnServerSignatureImage(
-            withUserID: userId,
-            success: {result in
-                resolve(result)
-            }, error: {error in
-                reject("-1", error?.localizedDescription, error)
-            })
+        DispatchQueue.main.async {
+            AXUserInfo.sharedInstance()?.returnServerSignatureImage(
+                withUserID: self.userId,
+                success: {result in
+                    resolve(result)
+                }, error: {error in
+                    reject("-1", error?.localizedDescription, error)
+                })
+        }
     }
     
     @objc(getSignImgAndSetItIfNotExist:withResolver:withRejecter:)
     func getSignImgAndSetItIfNotExist(signImgSetting: NSDictionary, resolve:@escaping RCTPromiseResolveBlock,reject:@escaping RCTPromiseRejectBlock) -> Void {
-        AXUserInfo.sharedInstance()?.passCertSignAndPicOrSign(
-            withUserID: userId,
-            data_base64: "",
-            success: {result in
-                resolve(result)
-            }, error: {error in
-                reject("-1", error?.localizedDescription, error)
-            })
+        DispatchQueue.main.async {
+            AXUserInfo.sharedInstance()?.passCertSignAndPicOrSign(
+                withUserID: self.userId,
+                data_base64: "",
+                success: {result in
+                    resolve(result)
+                }, error: {error in
+                    reject("-1", error?.localizedDescription, error)
+                })
+        }
     }
     
     @objc(getSignImgFromService:withRejecter:)
     func getSignImgFromService(resolve:@escaping RCTPromiseResolveBlock,reject:@escaping RCTPromiseRejectBlock) -> Void {
-        AXUserInfo.sharedInstance()?.getCertSignAndPicOrSign(
-            withUserID: userId,
-            success: {result in
-                resolve(result)
-            }, error: {error in
-                reject("-1", error?.localizedDescription, error)
-            })
+        DispatchQueue.main.async {
+            AXUserInfo.sharedInstance()?.getCertSignAndPicOrSign(
+                withUserID: self.userId,
+                success: {result in
+                    resolve(result)
+                }, error: {error in
+                    reject("-1", error?.localizedDescription, error)
+                })
+        }
     }
     
     @objc(getSignImgWithDrawingBoard:withResolver:withRejecter:)
     func getSignImgWithDrawingBoard(signImgSetting: NSDictionary, resolve:@escaping RCTPromiseResolveBlock,reject:@escaping RCTPromiseRejectBlock) -> Void {
-        AXUserInfo.sharedInstance()?.returnSignImage({ (image) in
-            resolve(image)
-        })
+        DispatchQueue.main.async {
+            AXUserInfo.sharedInstance()?.returnSignImage({ (image) in
+                resolve(image)
+            })
+        }
     }
     
     @objc(getCert:withResolver:withRejecter:)
